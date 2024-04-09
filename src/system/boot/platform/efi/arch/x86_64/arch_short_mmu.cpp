@@ -5,18 +5,23 @@
 
 
 #include <algorithm>
+#include "generic_mmu.h"
+
 
 // Include the x86 version of descriptors.h
 #undef __x86_64__
+#define __i386__
 #include <arch/x86/descriptors.h>
+#undef __i386__
 #define __x86_64__
 
 #include <kernel.h>
+#define __i386__
 #include <boot/platform.h>
+#undef __i386__
 #include <boot/stage2.h>
 
 #include "efi_platform.h"
-#include "generic_mmu.h"
 #include "mmu.h"
 
 //#define TRACE_SHORT_MMU

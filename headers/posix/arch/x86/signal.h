@@ -10,7 +10,7 @@
  * Architecture-specific structure passed to signal handlers
  */
 
-#if __i386__
+#ifdef __i386__
 
 typedef struct packed_fp_stack {
 	unsigned char	st0[10];
