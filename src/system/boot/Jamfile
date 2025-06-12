@@ -417,6 +417,9 @@ for platform in [ MultiBootSubDirSetup ] {
 			case bios_ia32 :
 				BuildBiosLoader haiku_loader.$(TARGET_BOOT_PLATFORM) : <revisioned>boot_loader_$(TARGET_BOOT_PLATFORM) ;
 
+			case sfi :
+				BuildBiosLoader haiku_loader.$(TARGET_BOOT_PLATFORM) : <revisioned>boot_loader_$(TARGET_BOOT_PLATFORM) ;
+
 			case pxe_ia32 :
 				BuildBiosLoader haiku_loader.$(TARGET_BOOT_PLATFORM) : <revisioned>boot_loader_$(TARGET_BOOT_PLATFORM) ;
 
