@@ -264,7 +264,7 @@ rule KernelArchitectureSetup architecture
 
 		case x86 :
 			HAIKU_KERNEL_PLATFORM ?= bios_ia32 ;
-			HAIKU_BOOT_TARGETS += bios_ia32 efi pxe_ia32 ;
+			HAIKU_BOOT_TARGETS += bios_ia32 efi pxe_ia32 sfi ;
 
 			HAIKU_BOOT_FLOPPY_IMAGE_SIZE = 2880 ; # in kB
 			# offset in floppy image (>= sizeof(haiku_loader))
@@ -289,7 +289,7 @@ rule KernelArchitectureSetup architecture
 		case x86_64 :
 			# x86_64 completely shares the x86 bootloader for MBR.
 			HAIKU_KERNEL_PLATFORM ?= bios_ia32 ;
-			HAIKU_BOOT_TARGETS += bios_ia32 efi pxe_ia32 ;
+			HAIKU_BOOT_TARGETS += bios_ia32 efi pxe_ia32 sfi ;
 
 			HAIKU_BOOT_FLOPPY_IMAGE_SIZE = 2880 ; # in kB
 			# offset in floppy image (>= sizeof(haiku_loader))
@@ -501,7 +501,7 @@ rule KernelArchitectureSetup architecture
 				}
 				HAIKU_BOOT_$(bootTarget:U)_LDFLAGS = -Bstatic -Bsymbolic
 					-nostdlib -znocombreloc -no-undefined ;
-			case bios_ia32 :
+			case *_ia32 :
 				# bios_ia32 is non-PIC
 				HAIKU_BOOT_$(bootTarget:U)_CCFLAGS += -fno-pic -march=pentium ;
 				HAIKU_BOOT_$(bootTarget:U)_C++FLAGS += -fno-pic -march=pentium ;
@@ -514,10 +514,10 @@ rule KernelArchitectureSetup architecture
 					HAIKU_BOOT_$(bootTarget:U)_CCFLAGS += -Wno-error=main -m32 ;
 					HAIKU_BOOT_$(bootTarget:U)_C++FLAGS += -Wno-error=main -m32 ;
 				}
-			case pxe_ia32 :
-				# pxe_ia32 is non-PIC
-				HAIKU_BOOT_$(bootTarget:U)_CCFLAGS += -fno-pic -march=pentium ;
-				HAIKU_BOOT_$(bootTarget:U)_C++FLAGS += -fno-pic -march=pentium ;
+			case sfi :
+				# sfi is non-PIC
+				HAIKU_BOOT_$(bootTarget:U)_CCFLAGS += -fno-pic -march=atom ;
+				HAIKU_BOOT_$(bootTarget:U)_C++FLAGS += -fno-pic -march=atom ;
 				if $(HAIKU_CC_IS_CLANG_$(architecture)) = 1 {
 					HAIKU_BOOT_$(bootTarget:U)_LDFLAGS += -m elf_i386 ;
 				} else {

@@ -184,6 +184,7 @@ _start(void)
 
 	interrupts_init();
 	console_init();
+	platform_init_video();
 	cpu_init();
 	mmu_init();
 	debug_init_post_mmu();

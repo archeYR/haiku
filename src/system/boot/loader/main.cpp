@@ -49,7 +49,7 @@ main(stage2_args *args)
 
 	add_stage2_driver_settings(args);
 
-	platform_init_video();
+	//platform_init_video();
 
 	// the main platform dependent initialisation
 	// has already taken place at this point.
